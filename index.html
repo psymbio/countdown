@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .countdown {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown"></div>
+    <script>
+        // Set the future date for the countdown
+        const futureDate = new Date("2025-01-01T00:00:00").getTime();
+
+        // Update the countdown every 1 second
+        const countdown = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the time difference between now and the future date
+            const timeDifference = futureDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="countdown"
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is finished, display a message
+            if (timeDifference < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "Countdown finished!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
